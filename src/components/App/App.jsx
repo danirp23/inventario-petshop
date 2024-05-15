@@ -1,15 +1,21 @@
 import React from 'react';
 import './App.css';
-
+/* 
 import animals from './data';
-import AnimalCard from '../AnimalCard/AnimalCard';
-import Header from '../commons/Header';
-import "bulma/css/bulma.css"
+import AnimalCard from '../AnimalCard/AnimalCard';*/
+import Header from '../commons/Header/Header';
+import { BrowserRouter as Router } from 'react-router-dom'
+import 'bootstrap/dist/css/bootstrap.css'
+import AppRoutes from '../../routes/Routes';
 
 function App() {
   return (
     <div>
-      <Header></Header>
+      <Router>
+        <Header></Header>
+        <AppRoutes></AppRoutes>
+      </Router>
+      {/* 
       {animals.map(animal =>
         <AnimalCard
           diet={animal.diet}
@@ -18,7 +24,7 @@ function App() {
           size={animal.size}
 	        scientificName={animal.scientificName}
         />
-      )}
+      )} */}
     </div>
   );
 }
