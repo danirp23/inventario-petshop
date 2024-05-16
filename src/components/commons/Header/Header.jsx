@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 
 export default function Header() {
     return (
-        <Navbar bg="primary" data-bs-theme="dark">
+        <Navbar className="navbar__group"bg="primary" data-bs-theme="dark">
             <Container>
                 <Navbar.Brand href="#home">
                     <svg width="50" height="50" fill="none" xmlns="http://www.w3.org/2000/svg">
