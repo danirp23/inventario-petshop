@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from "yup";
 import Button from 'react-bootstrap/Button';
@@ -6,15 +6,15 @@ import FormBs from 'react-bootstrap/Form';
 import "./FormularyProduct.css";
 import { createNewProduct } from '../../services/axios.config';
 
-export default function FormularyProduct() {
+export default function FormularyProduct({ onSuccess, item }) {
 
   const initialValues = {
-    name: '',
-    description: '',
-    image: '',
-    stock: '',
-    price: ''
-  }
+    name: item ? item.name || '' : '',
+    description: item ? item.description || '' : '',
+    image: item ? item.image || '' : '',
+    stock: item ? item.stock || '' : '',
+    price: item ? item.price || '' : ''
+  };
 
   const validationSchema = Yup.object().shape({
     name: Yup.string()
@@ -32,7 +32,7 @@ export default function FormularyProduct() {
 
   const onSubmit = async (values, { resetForm }) => {
     try {
-      await createNewProduct(values);
+      onSuccess(values);
       resetForm();
     } catch (error) {
       console.error("Error al procesar la respuesta del servicio:", error);
@@ -86,7 +86,7 @@ export default function FormularyProduct() {
             </div>
 
             <Button type='submit' className="form__submit btn btn-primary" disabled={isSubmitting}> Cargar Producto</Button>
-            {isSubmitting ? (<p className="form__submitting">Enviando nuevo producto</p>) : null}
+            {isSubmitting ? (<p className="form__submitting">Enviando producto</p>) : null}
           </Form>
         )}
       </Formik>

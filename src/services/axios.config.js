@@ -22,6 +22,15 @@ export const getProducts = async (values) => {
         return response;
     } catch (error) {
         console.error("Error al devolver los productos:", error);
+    }
+};
+
+export const updateProducts = async (id, data) => {
+    try {
+        const response = await axiosInstance.put(`/${id}`, data);
+        return response;
+    } catch (error) {
+        console.error("Error al devolver los productos:", error);
         throw error;
     }
 };
