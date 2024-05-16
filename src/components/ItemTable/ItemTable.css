@@ -1,0 +1,9 @@
+.table__icons{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.bi-trash, .bi-pencil {
+    cursor: pointer;
+}
+

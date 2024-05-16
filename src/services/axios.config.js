@@ -15,3 +15,13 @@ export const createNewProduct = async (values) => {
         throw error;
     }
 };
+
+export const getProducts = async (values) => {
+    try {
+        const response = await axiosInstance.get('/');
+        return response;
+    } catch (error) {
+        console.error("Error al devolver los productos:", error);
+        throw error;
+    }
+};

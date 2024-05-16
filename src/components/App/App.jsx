@@ -6,6 +6,7 @@ import AnimalCard from '../AnimalCard/AnimalCard';*/
 import Header from '../commons/Header/Header';
 import { BrowserRouter as Router } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-icons/font/bootstrap-icons.css'
 import AppRoutes from '../../routes/Routes';
 
 function App() {
