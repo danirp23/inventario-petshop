@@ -7,18 +7,16 @@ import { ItemsContext, UPLOAD_ITEMS } from '../context/itemsContext';
 export default function StockProducts() {
 
   const {items, dispatch} = useContext(ItemsContext)
-  //const [items, setItems] = useState([]);
-
-  const fetchData = async () => {
-    try {
-      const response = await getProducts();
-      dispatch({type: UPLOAD_ITEMS, payload: response.data})
-    } catch (error) {
-      console.error("Error al procesar la respuesta del servicio:", error);
-    }
-  };
 
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await getProducts();
+        dispatch({type: UPLOAD_ITEMS, payload: response.data})
+      } catch (error) {
+        console.error("Error al procesar la respuesta del servicio:", error);
+      }
+    };
     fetchData();
   }, []);
 

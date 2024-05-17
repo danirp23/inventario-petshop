@@ -16,7 +16,7 @@ export const createNewProduct = async (values) => {
     }
 };
 
-export const getProducts = async (values) => {
+export const getProducts = async () => {
     try {
         const response = await axiosInstance.get('/');
         return response;

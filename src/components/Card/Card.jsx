@@ -2,16 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Card.css';
 
-export default function Card({ children, details, title }) {
-  return(
+export default function Card({ children, details = null, title }) {
+  return (
     <div className="card">
-      <div className="card-details">
-        <h2>{title}</h2>
+      <div className="card__details">
+        <h2 className="card__title">{title}</h2>
         {details}
       </div>
       {children}
     </div>
-  )
+  );
 }
 
 Card.propTypes = {
@@ -21,8 +21,4 @@ Card.propTypes = {
   ]),
   details: PropTypes.element,
   title: PropTypes.string.isRequired,
-}
-
-Card.defaultProps = {
-  details: null,
 }
