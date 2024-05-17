@@ -4,7 +4,7 @@ import FormularyProduct from '../Formulary/FormularyProduct';
 import { updateProducts } from '../../services/axios.config';
 import { ItemsContext, UPLOAD_ITEMS } from '../../context/itemsContext';
 import { useAlert } from '../../hooks/AlertProvider/AlertProvider';
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom';
 
 export default function ModalProducts(props) {
   const showAlert = useAlert();

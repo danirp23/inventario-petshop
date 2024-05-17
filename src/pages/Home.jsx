@@ -6,7 +6,8 @@ import "./Home.css";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
+import bannerImage from '../assets/images/banner.png';
+import UpdateStock from '../components/UpdateStock/UpdateStock';
 
 export default function Home() {
   const settings = {
@@ -33,6 +34,7 @@ export default function Home() {
 
   return (
     <div className="home__container">
+      <img src={bannerImage} alt="Banner de inicio" className="home__banner-image" />
       <h2 className="home__title">Productos</h2>
       <div className="home__product-list">
         <Slider {...settings}>
@@ -41,6 +43,7 @@ export default function Home() {
           ))}
         </Slider>
       </div>
+      <UpdateStock />
     </div>
   );
 }

@@ -1,0 +1,36 @@
+.update-stock {
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.update-stock__title {
+    margin-bottom: 10px;
+}
+
+.update-stock__select,
+.update-stock__input {
+    margin-right: 10px;
+}
+
+.update-stock__button {
+    padding: 5px 10px;
+}
+
+.update-stock__button {
+    background-color: #ff2293;
+    --bs-btn-border-color: #ff2293 !important;
+    --bs-btn-hover-bg: #fa51a8 !important;
+    --bs-btn-hover-border-color: #fa51a8 !important;
+    --bs-btn-active-bg: #fd118b !important;
+    --bs-btn-active-border-color: #fd118b !important;
+    --bs-btn-disabled-bg: #db90b6 !important;
+    --bs-btn-disabled-border-color: #db90b6 !important;
+}
+
+.update-stock__form-group {
+    margin-bottom: 1rem !important;
+}
+.update-stock__error{
+    color: #fd118b;
+}
+
