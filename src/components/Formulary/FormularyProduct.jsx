@@ -5,12 +5,12 @@ import Button from 'react-bootstrap/Button';
 import FormBs from 'react-bootstrap/Form';
 import "./FormularyProduct.css";
 import useImageUploader from '../../hooks/ImageUploader/ImageUploader';
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom';
 
 export default function FormularyProduct({ onSuccess, item }) {
   const { imageFile, imagePreview, handleImageChange, error, resetImageState } = useImageUploader();
   const fileInputRef = useRef(null);
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const initialValues = {
     name: item ? item.name || '' : '',
@@ -29,7 +29,7 @@ export default function FormularyProduct({ onSuccess, item }) {
       .min(10, 'descripcion muy corta')
       .max(150, 'descripcion muy larga')
       .required('El campo es obligatorio'),
-    stock: Yup.number().required('El campo es obligatorio'),
+    stock: Yup.number().required('El campo es obligatorio').positive('El stock debe ser un número positivo'),
     price: Yup.number().required('El campo es obligatorio'),
   })
 
@@ -50,13 +50,13 @@ export default function FormularyProduct({ onSuccess, item }) {
 
   return (
     <div className={`form__container ${item && item.image ? 'has-image' : ''}`}>
-      {item ? <img className="form__title" src={item.image} alt="Producto"/> : <h1 className="form__title">Nuevo Producto</h1>}
+      {item ? <img className="form__title" src={item.image} alt="Producto" /> : <h1 className="form__title">Nuevo Producto</h1>}
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={onSubmit}
       >
-        {({ isSubmitting, errors, touched, setFieldValue  }) => (
+        {({ isSubmitting, errors, touched, setFieldValue }) => (
           <Form className="form">
             <FormBs.Group className="form__group">
               <label htmlFor='name' className="form__label"> Nombre  </label>
