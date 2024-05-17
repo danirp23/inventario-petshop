@@ -5,7 +5,7 @@ import ProductsDetails from '../ProductsDetails/ProductsDetails';
 import './ProductsCard.css';
 
 export default function ProductsCard({ product }) {
-  const { name, size } = product;
+  const { name } = product;
 
   return (
     <Card title={name}>

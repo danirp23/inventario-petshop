@@ -4,9 +4,11 @@ import FormularyProduct from '../Formulary/FormularyProduct';
 import { updateProducts } from '../../services/axios.config';
 import { ItemsContext, UPLOAD_ITEMS } from '../../context/itemsContext';
 import { useAlert } from '../../hooks/AlertProvider/AlertProvider';
+import { useNavigate } from 'react-router-dom'; 
 
 export default function ModalProducts(props) {
   const showAlert = useAlert();
+  const navigate = useNavigate(); 
 
   const { items, dispatch } = useContext(ItemsContext)
 
@@ -22,7 +24,7 @@ export default function ModalProducts(props) {
       showAlert('¡Registro creado exitosamente!', 'success');
     } catch (error) {
       console.error("Error al procesar la respuesta del servicio:", error);
-      throw error;
+      navigate('/error');
     }
   };
   return (

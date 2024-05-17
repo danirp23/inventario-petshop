@@ -7,10 +7,8 @@
     padding: 20px;
     margin: 10px;
     width: 300px;
-    /* Ajusta el ancho según sea necesario */
     transition: all 0.2s ease-in-out;
     align-items: center;
-    /* Centra el contenido verticalmente */
 }
 
 .card:hover {

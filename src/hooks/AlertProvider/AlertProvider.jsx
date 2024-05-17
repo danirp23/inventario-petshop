@@ -1,6 +1,6 @@
 import React, { useState, createContext, useContext } from 'react';
 import Alert from 'react-bootstrap/Alert';
-import './AlertProvider.css'; // Importa los estilos
+import './AlertProvider.css';
 
 const AlertContext = createContext();
 

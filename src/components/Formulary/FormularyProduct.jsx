@@ -5,10 +5,12 @@ import Button from 'react-bootstrap/Button';
 import FormBs from 'react-bootstrap/Form';
 import "./FormularyProduct.css";
 import useImageUploader from '../../hooks/ImageUploader/ImageUploader';
+import { useNavigate } from 'react-router-dom'; 
 
 export default function FormularyProduct({ onSuccess, item }) {
   const { imageFile, imagePreview, handleImageChange, error, resetImageState } = useImageUploader();
   const fileInputRef = useRef(null);
+  const navigate = useNavigate(); 
 
   const initialValues = {
     name: item ? item.name || '' : '',
@@ -41,6 +43,7 @@ export default function FormularyProduct({ onSuccess, item }) {
       resetImageState();
       fileInputRef.current.value = '';
     } catch (error) {
+      navigate('/error');
       console.error('Error al procesar la respuesta del servicio:', error);
     }
   };
@@ -72,7 +75,7 @@ export default function FormularyProduct({ onSuccess, item }) {
             <div className="form__group">
               <label htmlFor='image' className="form__label">Imagen</label>
               <input
-                ref={fileInputRef} // Asigna la referencia al input del archivo
+                ref={fileInputRef}
                 type="file"
                 id="image"
                 accept="image/*"

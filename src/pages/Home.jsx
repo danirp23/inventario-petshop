@@ -23,7 +23,6 @@ export default function Home() {
       try {
         const response = await getProducts();
         dispatch({ type: UPLOAD_ITEMS, payload: response.data });
-        console.log('response.data', response.data);
       } catch (error) {
         console.error("Error al procesar la respuesta del servicio:", error);
       }

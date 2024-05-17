@@ -18,7 +18,7 @@ export default function StockProducts() {
       }
     };
     fetchData();
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="stock__container">

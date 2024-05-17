@@ -23,6 +23,9 @@ export default function Header() {
                     <Nav.Item>
                         <Link className="link-nav" to='/show'>Productos</Link>
                     </Nav.Item>
+                    <Nav.Item>
+                        <Link className="link-nav" to='/error'>Error</Link>
+                    </Nav.Item>
                 </Nav>
             </Container>
         </Navbar>

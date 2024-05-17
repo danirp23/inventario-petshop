@@ -1,8 +1,5 @@
 import React, { useReducer } from 'react';
 import './App.css';
-/* 
-import animals from './data';
-import AnimalCard from '../AnimalCard/AnimalCard';*/
 import Header from '../commons/Header/Header';
 import { BrowserRouter as Router } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.css'
@@ -25,16 +22,6 @@ function App() {
           </ItemsContext.Provider>
         </AlertProvider>
       </Router>
-      {/* 
-      {animals.map(animal =>
-        <AnimalCard
-          diet={animal.diet}
-          key={animal.name}
-          name={animal.name}
-          size={animal.size}
-	        scientificName={animal.scientificName}
-        />
-      )} */}
     </div>
   );
 }
