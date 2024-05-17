@@ -1,4 +1,4 @@
-export default [
+const mockDataAnimals = [
   {
     name: 'Lion',
     scientificName: 'Panthero leo',
@@ -19,3 +19,4 @@ export default [
   }
 ]
 
+module.exports = mockDataAnimals;
