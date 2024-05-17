@@ -3,8 +3,10 @@ import Modal from 'react-bootstrap/Modal';
 import FormularyProduct from '../Formulary/FormularyProduct';
 import { updateProducts } from '../../services/axios.config';
 import { ItemsContext, UPLOAD_ITEMS } from '../../context/itemsContext';
+import { useAlert } from '../../hooks/AlertProvider/AlertProvider';
 
 export default function ModalProducts(props) {
+  const showAlert = useAlert();
 
   const { items, dispatch } = useContext(ItemsContext)
 
@@ -17,6 +19,7 @@ export default function ModalProducts(props) {
         return item.id === result.data.id ? result.data : item
       })
       dispatch({ type: UPLOAD_ITEMS, payload: itemsUpload});
+      showAlert('¡Registro creado exitosamente!', 'success');
     } catch (error) {
       console.error("Error al procesar la respuesta del servicio:", error);
       throw error;

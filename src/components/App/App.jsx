@@ -9,6 +9,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import AppRoutes from '../../routes/Routes';
 import { ItemsContext, ItemsReducer } from "../../context/itemsContext";
+import { AlertProvider } from '../../hooks/AlertProvider/AlertProvider';
 
 function App() {
 
@@ -17,10 +18,12 @@ function App() {
   return (
     <div>
       <Router>
-        <ItemsContext.Provider value={{items, dispatch}}>
-          <Header></Header>
-          <AppRoutes></AppRoutes>
-        </ItemsContext.Provider>
+        <AlertProvider>
+          <ItemsContext.Provider value={{ items, dispatch }}>
+            <Header></Header>
+            <AppRoutes></AppRoutes>
+          </ItemsContext.Provider>
+        </AlertProvider>
       </Router>
       {/* 
       {animals.map(animal =>
