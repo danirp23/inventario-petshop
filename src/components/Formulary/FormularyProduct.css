@@ -58,4 +58,6 @@
     --bs-btn-hover-border-color: #fa51a8 !important;
     --bs-btn-active-bg: #fd118b !important;
     --bs-btn-active-border-color: #fd118b !important;
+    --bs-btn-disabled-bg: #db90b6 !important;
+    --bs-btn-disabled-border-color: #db90b6 !important;
 }
