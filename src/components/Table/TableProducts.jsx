@@ -3,7 +3,7 @@ import "./TableProducts.css";
 import Table from 'react-bootstrap/Table';
 import ItemTable from '../ItemTable/ItemTable';
 
-export default function TableProducts({ items, editItem }) {
+export default function TableProducts({ items }) {
   return (
     <Table striped bordered hover>
       <thead>
@@ -17,7 +17,7 @@ export default function TableProducts({ items, editItem }) {
       </thead>
       <tbody>
         {items.map((item, i) => (
-          <ItemTable item={item} key={i} editItem={editItem}/>
+          <ItemTable item={item} key={i}/>
         ))}
       </tbody>
     </Table>

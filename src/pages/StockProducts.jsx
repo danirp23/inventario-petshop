@@ -1,15 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect } from 'react'
 import TableProducts from '../components/Table/TableProducts';
-import { getProducts, updateProducts } from '../services/axios.config';
+import { getProducts } from '../services/axios.config';
 import "./stockProducts.css";
+import { ItemsContext, UPLOAD_ITEMS } from '../context/itemsContext';
 
 export default function StockProducts() {
-  const [items, setItems] = useState([]);
+
+  const {items, dispatch} = useContext(ItemsContext)
+  //const [items, setItems] = useState([]);
 
   const fetchData = async () => {
     try {
       const response = await getProducts();
-      setItems(response.data);
+      dispatch({type: UPLOAD_ITEMS, payload: response.data})
     } catch (error) {
       console.error("Error al procesar la respuesta del servicio:", error);
     }
@@ -19,24 +22,13 @@ export default function StockProducts() {
     fetchData();
   }, []);
 
-  const editItem = async (id, data) => {
-    try {
-      await updateProducts(id, data);
-      fetchData();
-    } catch (error) {
-      console.error("Error al procesar la respuesta del servicio:", error);
-      throw error;
-    }
-
-  }
-
   return (
     <div className="stock__container">
       <h1 className="stock__title">Listar Productos</h1>
       <div className='stock__table'>
         {
           items.length > 0 ?
-            <TableProducts items={items} editItem={editItem}></TableProducts>
+            <TableProducts items={items}></TableProducts>
             :
             <p> No hay datos para mostrar</p>
         }

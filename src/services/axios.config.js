@@ -34,3 +34,13 @@ export const updateProducts = async (id, data) => {
         throw error;
     }
 };
+
+export const deleteProducts = async (id) => {
+    try {
+        const response = await axiosInstance.delete(`/${id}`);
+        return response;
+    } catch (error) {
+        console.error("Error al devolver los productos:", error);
+        throw error;
+    }
+};

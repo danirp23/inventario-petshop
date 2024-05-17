@@ -1,13 +1,26 @@
-import React from 'react'
-import Button from 'react-bootstrap/Button';
+import React, { useContext } from 'react'
 import Modal from 'react-bootstrap/Modal';
 import FormularyProduct from '../Formulary/FormularyProduct';
 import { updateProducts } from '../../services/axios.config';
+import { ItemsContext, UPLOAD_ITEMS } from '../../context/itemsContext';
 
 export default function ModalProducts(props) {
+
+  const { items, dispatch } = useContext(ItemsContext)
+
   const onSuccess = async (values) => {
-    await props.onSubmit(props.item.id, values)
     props.onHide()
+
+    try {
+      const result = await updateProducts(props.item.id, values);
+      const itemsUpload = items.map(item => {
+        return item.id === result.data.id ? result.data : item
+      })
+      dispatch({ type: UPLOAD_ITEMS, payload: itemsUpload});
+    } catch (error) {
+      console.error("Error al procesar la respuesta del servicio:", error);
+      throw error;
+    }
   };
   return (
     <div>
@@ -19,15 +32,12 @@ export default function ModalProducts(props) {
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-            Modal heading
+            Actualiza del Producto
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <FormularyProduct onSuccess={onSuccess} item={props.item}> </FormularyProduct>
         </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={props.onHide}>Close</Button>
-        </Modal.Footer>
       </Modal>
     </div>
   )

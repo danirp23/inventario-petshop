@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from "yup";
 import Button from 'react-bootstrap/Button';
 import FormBs from 'react-bootstrap/Form';
 import "./FormularyProduct.css";
-import { createNewProduct } from '../../services/axios.config';
 
 export default function FormularyProduct({ onSuccess, item }) {
 
@@ -41,7 +40,7 @@ export default function FormularyProduct({ onSuccess, item }) {
 
   return (
     <div className="form__container">
-      <h1 className="form__title"> Nuevo Producto </h1>
+      {item ? null : <h1 className="form__title"> Nuevo Producto </h1>}
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
