@@ -14,7 +14,7 @@ function App() {
   const initialState = []
   const [items, dispatch] = useReducer(ItemsReducer, initialState);
   return (
-    <div>
+    <div className='app-container'>
       <Router>
         <AlertProvider>
           <ItemsContext.Provider value={{ items, dispatch }}>

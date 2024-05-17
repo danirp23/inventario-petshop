@@ -35,7 +35,6 @@ export default function Home() {
   return (
     <div className="home__container">
       <img src={bannerImage} alt="Banner de inicio" className="home__banner-image" />
-      <h2 className="home__title">Productos</h2>
       <div className="home__product-list">
         <Slider {...settings}>
           {items.map(product => (
