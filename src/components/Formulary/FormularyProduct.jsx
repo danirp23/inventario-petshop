@@ -1,11 +1,14 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from "yup";
 import Button from 'react-bootstrap/Button';
 import FormBs from 'react-bootstrap/Form';
 import "./FormularyProduct.css";
+import useImageUploader from '../../hooks/ImageUploader/ImageUploader';
 
 export default function FormularyProduct({ onSuccess, item }) {
+  const { imageFile, imagePreview, handleImageChange, error, resetImageState } = useImageUploader();
+  const fileInputRef = useRef(null);
 
   const initialValues = {
     name: item ? item.name || '' : '',
@@ -24,29 +27,33 @@ export default function FormularyProduct({ onSuccess, item }) {
       .min(10, 'descripcion muy corta')
       .max(150, 'descripcion muy larga')
       .required('El campo es obligatorio'),
-    image: Yup.string().required('El campo es obligatorio'),
     stock: Yup.number().required('El campo es obligatorio'),
     price: Yup.number().required('El campo es obligatorio'),
   })
 
   const onSubmit = async (values, { resetForm }) => {
     try {
+      if (imageFile) {
+        values.image = imagePreview;
+      }
       onSuccess(values);
       resetForm();
+      resetImageState();
+      fileInputRef.current.value = '';
     } catch (error) {
-      console.error("Error al procesar la respuesta del servicio:", error);
+      console.error('Error al procesar la respuesta del servicio:', error);
     }
   };
 
   return (
-    <div className="form__container">
-      {item ? null : <h1 className="form__title"> Nuevo Producto </h1>}
+    <div className={`form__container ${item && item.image ? 'has-image' : ''}`}>
+      {item ? <img className="form__title" src={item.image} alt="Producto"/> : <h1 className="form__title">Nuevo Producto</h1>}
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={onSubmit}
       >
-        {({ isSubmitting, errors, touched }) => (
+        {({ isSubmitting, errors, touched, setFieldValue  }) => (
           <Form className="form">
             <FormBs.Group className="form__group">
               <label htmlFor='name' className="form__label"> Nombre  </label>
@@ -63,10 +70,21 @@ export default function FormularyProduct({ onSuccess, item }) {
               )}
             </div>
             <div className="form__group">
-              <label htmlFor='image' className="form__label"> Imagen   </label>
-              <Field id='image' type='text' placeholder='Imagen' name='image' className="form__input form-control" />
+              <label htmlFor='image' className="form__label">Imagen</label>
+              <input
+                ref={fileInputRef} // Asigna la referencia al input del archivo
+                type="file"
+                id="image"
+                accept="image/*"
+                onChange={handleImageChange}
+                className="form__input form-control"
+              />
               {errors.image && touched.image && (
                 <ErrorMessage name='image' component='div' className="form__error"></ErrorMessage>
+              )}
+              {error && <div className="form__error">{error}</div>}
+              {imagePreview && (
+                <img src={imagePreview} alt="Preview" className="form__image-preview" />
               )}
             </div>
             <div className="form__group">

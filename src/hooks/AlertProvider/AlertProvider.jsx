@@ -17,7 +17,7 @@ export const AlertProvider = ({ children }) => {
     setAlert(message);
     setTimeout(() => {
       setAlert(null);
-    }, 3000); // 3 segundos
+    }, 3000);
   };
 
   return (
