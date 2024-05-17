@@ -7,6 +7,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css'
 import AppRoutes from '../../routes/Routes';
 import { ItemsContext, ItemsReducer } from "../../context/itemsContext";
 import { AlertProvider } from '../../hooks/AlertProvider/AlertProvider';
+import FooterPage from '../Footer/FooterPage';
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
           </ItemsContext.Provider>
         </AlertProvider>
       </Router>
+      <FooterPage/>
     </div>
   );
 }
