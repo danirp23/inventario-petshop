@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useContext, useEffect, useRef } from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from "yup";
 import Button from 'react-bootstrap/Button';
@@ -6,14 +6,18 @@ import FormBs from 'react-bootstrap/Form';
 import "./FormularyProduct.css";
 import useImageUploader from '../../hooks/ImageUploader/ImageUploader';
 import { useNavigate } from 'react-router-dom';
+import { CategoryContext, UPLOAD_CATEGORIES } from '../../context/itemsContext';
+import { getCategory } from '../../services/axiosCategory.consig';
 
 export default function FormularyProduct({ onSuccess, item }) {
   const { imageFile, imagePreview, handleImageChange, error, resetImageState } = useImageUploader();
   const fileInputRef = useRef(null);
   const navigate = useNavigate();
+  const { categoryDis, dispatchCategory } = useContext(CategoryContext);
 
   const initialValues = {
     name: item ? item.name || '' : '',
+    category: item ? item.category || '' : '',
     description: item ? item.description || '' : '',
     image: item ? item.image || '' : '',
     stock: item ? item.stock || '' : '',
@@ -23,10 +27,11 @@ export default function FormularyProduct({ onSuccess, item }) {
   const validationSchema = Yup.object().shape({
     name: Yup.string()
       .min(4, 'nombre muy corto')
-      .max(20, 'nombre muy largo')
+      .max(40, 'nombre muy largo')
       .required('El campo es obligatorio'),
+    category: Yup.string().required(),
     description: Yup.string()
-      .min(10, 'descripcion muy corta')
+      .min(5, 'descripcion muy corta')
       .max(150, 'descripcion muy larga')
       .required('El campo es obligatorio'),
     stock: Yup.number().required('El campo es obligatorio').positive('El stock debe ser un número positivo'),
@@ -48,6 +53,20 @@ export default function FormularyProduct({ onSuccess, item }) {
     }
   };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const responseCategory = await getCategory();
+        dispatchCategory({ type: UPLOAD_CATEGORIES, payload: responseCategory.data });
+      } catch (error) {
+        console.error("Error al procesar la respuesta del servicio:", error);
+      }
+    };
+
+    fetchData();
+  }, [dispatchCategory]);
+
+
   return (
     <div className={`form__container ${item && item.image ? 'has-image' : ''}`}>
       {item ? <img className="form__title" src={item.image} alt="Producto" /> : <h1 className="form__title">Nuevo Producto</h1>}
@@ -56,15 +75,31 @@ export default function FormularyProduct({ onSuccess, item }) {
         validationSchema={validationSchema}
         onSubmit={onSubmit}
       >
-        {({ isSubmitting, errors, touched, setFieldValue }) => (
+        {({ isSubmitting, errors, touched, values }) => (
           <Form className="form">
             <FormBs.Group className="form__group">
-              <label htmlFor='name' className="form__label"> Nombre  </label>
+              <label htmlFor='name' className="form__label"> Nombre </label>
               <Field id='name' type='text' placeholder='Buzo' name='name' className="form__input form-control" />
               {errors.name && touched.name && (
                 <ErrorMessage name='name' component='div' className="form__error"></ErrorMessage>
               )}
             </FormBs.Group>
+            <div className="form__group">
+            <label htmlFor='category' className="form__label"> Categoria </label>
+              <Field as="select" name="category" id='category' className="form__category__input form-control">
+                <option value="" disabled>
+                  Seleccione la categoria
+                </option>
+                {categoryDis.map(item => (
+                  <option key={item.id} value={item.id}>
+                    {item.name}
+                  </option>
+                ))}
+              </Field>
+              {errors.category && touched.category && (
+                <ErrorMessage name='category' component='div' className="form__error"></ErrorMessage>
+              )}
+            </div>
             <div className="form__group">
               <label htmlFor='description' className="form__label"> Descripcion  </label>
               <Field id='description' type='text' placeholder='Buzo comodo invierno' name='description' className="form__input form-control" />

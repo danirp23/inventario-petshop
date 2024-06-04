@@ -21,7 +21,7 @@ export default function FooterPage() {
                         <ul className="footer__list">
                             <li className="footer__list-item">
                                 <a href="https://www.facebook.com/p/HAKU-Petshop-100065104568233/?locale=es_LA" className="footer__link">
-                                    <i class="bi bi-facebook footer__icon"></i>
+                                    <i className="bi bi-facebook footer__icon"></i>
                                 </a>
                             </li>
                             <li className="footer__list-item">
