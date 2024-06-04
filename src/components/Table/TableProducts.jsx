@@ -10,6 +10,7 @@ export default function TableProducts({ items }) {
         <tr>
           <th>#Id</th>
           <th>Producto</th>
+          <th>Categoria</th>
           <th>Precio</th>
           <th>Stock</th>
           <th className="table__actions">Acciones</th>

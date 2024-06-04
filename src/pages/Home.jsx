@@ -8,6 +8,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import bannerImage from '../assets/images/banner.png';
 import UpdateStock from '../components/UpdateStock/UpdateStock';
+import CreateCategory from '../components/CreateCategory/CreateCategory';
 
 export default function Home() {
   const settings = {
@@ -42,6 +43,7 @@ export default function Home() {
           ))}
         </Slider>
       </div>
+      <CreateCategory/>
       <UpdateStock />
     </div>
   );
